@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <com.grilla.hereseum.views.CustomFontTextView
+            android:id="@+id/month1"
+            style="@style/TimelineMonth"
+            android:text="J"/>
+
+        <com.grilla.hereseum.views.CustomFontTextView
+            android:id="@+id/month2"
+            style="@style/TimelineMonth"
+            android:text="F"/>
+
+        <com.grilla.hereseum.views.CustomFontTextView
+            android:id="@+id/month3"
+            style="@style/TimelineMonth"
+            android:text="M"/>
+
+        <com.grilla.hereseum.views.CustomFontTextView
+            android:id="@+id/month4"
+            style="@style/TimelineMonth"
+            android:text="A"/>
+
+        <com.grilla.hereseum.views.CustomFontTextView
+            android:id="@+id/month5"
+            style="@style/TimelineMonth"
+            android:text="M"/>
+
+        <com.grilla.hereseum.views.CustomFontTextView
+            android:id="@+id/month6"
+            style="@style/TimelineMonth"
+            android:text="J"/>
+
+        <com.grilla.hereseum.views.CustomFontTextView
+            android:id="@+id/month7"
+            style="@style/TimelineMonth"
+            android:text="J"/>
+
+        <com.grilla.hereseum.views.CustomFontTextView
+            android:id="@+id/month8"
+            style="@style/TimelineMonth"
+            android:textColor="@color/text"
+            android:text="A"/>
+
+        <com.grilla.hereseum.views.CustomFontTextView
+            android:id="@+id/month9"
+            style="@style/TimelineMonth"
+            android:text="S"/>
+
+        <com.grilla.hereseum.views.CustomFontTextView
+            android:id="@+id/month10"
+            style="@style/TimelineMonth"
+            android:text="O"/>
+
+        <com.grilla.hereseum.views.CustomFontTextView
+            android:id="@+id/month11"
+            style="@style/TimelineMonth"
+            android:text="N"/>
+
+        <com.grilla.hereseum.views.CustomFontTextView
+            android:id="@+id/month12"
+            style="@style/TimelineMonth"
+            android:text="D"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <com.grilla.hereseum.views.CustomFontTextView
+            android:id="@+id/year10"
+            style="@style/TimelineYear"
+            android:background="#e74c3c"
+            android:text="10"/>
+
+        <com.grilla.hereseum.views.CustomFontTextView
+            android:id="@+id/year11"
+            style="@style/TimelineYear"
+            android:background="#f1c40f"
+            android:text="11"/>
+
+        <com.grilla.hereseum.views.CustomFontTextView
+            android:id="@+id/year12"
+            style="@style/TimelineYear"
+            android:background="#2ecc71"
+            android:text="12"/>
+
+        <com.grilla.hereseum.views.CustomFontTextView
+            android:id="@+id/year13"
+            style="@style/TimelineYear"
+            android:background="#3498db"
+            android:text="13"/>
+
+        <com.grilla.hereseum.views.CustomFontTextView
+            android:id="@+id/year14"
+            style="@style/TimelineYear"
+            android:background="#9b59b6"
+            android:text="14"/>
+
+        <com.grilla.hereseum.views.CustomFontTextView
+            android:id="@+id/year15"
+            style="@style/TimelineYear"
+            android:background="#2c3e50"
+            android:text="15"
+            android:textColor="@color/text"/>
+
+    </LinearLayout>
+</LinearLayout>

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="launch_background">#333</color>
+    <color name="post_background">#222</color>
+
+    <color name="text">#fff</color>
+    <color name="text_faded">#8fff</color>
+    <color name="text_disabled">#2fff</color>
+</resources>
