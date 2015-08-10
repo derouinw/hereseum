@@ -90,7 +90,9 @@ public class MainActivity extends AppCompatActivity implements
 
         mPreviousStartTime = 0;
 
-        mMonth = Calendar.getInstance().get(Calendar.MONTH);
+        Calendar cal = Calendar.getInstance();
+        mMonth = cal.get(Calendar.MONTH);
+        mYear = cal.get(Calendar.YEAR);
 
         setupLocation();
     }
@@ -211,7 +213,8 @@ public class MainActivity extends AppCompatActivity implements
                 Log.d(TAG, "Loading more: " + startTime);
 
                 if (startTime == mPreviousStartTime) {
-                    if (mMonth == Calendar.getInstance().get(Calendar.MONTH)) {
+                    Calendar cal = Calendar.getInstance();
+                    if (mMonth == cal.get(Calendar.MONTH) && mYear == cal.get(Calendar.YEAR)) {
                         // current month
                         mFooterText.setText("You're all caught up");
                         mFooterText.setVisibility(View.VISIBLE);
