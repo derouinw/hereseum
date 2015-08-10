@@ -27,6 +27,7 @@ import bolts.Task;
  * Created by bill on 8/7/15.
  */
 public class TaskCreator {
+    private static final int SEARCH_DISTANCE = 42;
     private static final String TAG = "TaskCreator";
     private static final String INSTA_TOKEN_URL = "https://api.instagram.com/oauth/access_token";
     private static final String INSTA_SEARCH_URL = "https://api.instagram.com/v1/media/search";
@@ -117,6 +118,7 @@ public class TaskCreator {
                 String url = INSTA_SEARCH_URL +
                         "?lat=" + loc.getLatitude() +
                         "&lng=" + loc.getLongitude() +
+                        "&distance=" + SEARCH_DISTANCE +
                         "&access_token=" + accessToken;
                 if (startTime != 0) {
                     url += "&min_timestamp=" + startTime;
