@@ -1,0 +1,17 @@
+language: android
+jdk: oraclejdk7
+branches:
+  only:
+    - develop
+    - master
+env:
+  matrix:
+    - ANDROID_TARGET=android-21  ANDROID_ABI=armeabi-v7a
+before_install:
+ - chmod +x gradlew
+android:
+  components:
+    - build-tools-21.1.2
+  licenses:
+    - android-sdk-license-5be876d5
+script: ./gradlew assemble
