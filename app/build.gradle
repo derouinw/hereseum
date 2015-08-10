@@ -33,6 +33,5 @@ dependencies {
     compile 'com.parse.bolts:bolts-android:1.2.1'
     compile 'me.neavo:volley:2014.12.09'
     compile 'com.squareup.picasso:picasso:2.5.2'
-    compile 'com.android.support:design:22.2.1'
     compile 'com.github.lawloretienne:quickreturn:0.0.1'
 }
