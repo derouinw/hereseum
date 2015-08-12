@@ -114,7 +114,7 @@ public class MainActivity extends AppCompatActivity implements
         Calendar startDate = Calendar.getInstance();
         startDate.set(Calendar.YEAR, year);
         startDate.set(Calendar.MONTH, month);
-        startDate.set(Calendar.DAY_OF_MONTH, -4); // ¯\_(ツ)_/¯
+        startDate.set(Calendar.DAY_OF_MONTH, 0); // ¯\_(ツ)_/¯
         return startDate.getTimeInMillis()/1000;
     }
 
