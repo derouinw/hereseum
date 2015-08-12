@@ -36,6 +36,15 @@ public class MainActivity extends AppCompatActivity implements
 
     public static final String EXTRA_ACCESS_TOKEN = "access_token";
 
+    private static final int[] YEARS_COLORS = {
+            R.color.timeline_color0,
+            R.color.timeline_color1,
+            R.color.timeline_color2,
+            R.color.timeline_color3,
+            R.color.timeline_color4,
+            R.color.timeline_color5
+    };
+
     private String mAccessToken;
     private Location mCurrentLocation;
     private boolean mLoadedFirst;
@@ -43,6 +52,7 @@ public class MainActivity extends AppCompatActivity implements
     private long mPreviousStartTime;
     private int mYear, mMonth;
 
+    private View mToolbarBackground;
     private TimelineView mTimeline;
     private RelativeLayout mEmptyArea;
     private ListView mList;
@@ -61,6 +71,8 @@ public class MainActivity extends AppCompatActivity implements
         setContentView(R.layout.activity_main);
 
         mAccessToken = getIntent().getStringExtra(EXTRA_ACCESS_TOKEN);
+
+        mToolbarBackground = findViewById(R.id.toolbar);
 
         mTimeline = (TimelineView)findViewById(R.id.timeline);
         mTimeline.setOnDateSelectedListener(this);
@@ -239,6 +251,8 @@ public class MainActivity extends AppCompatActivity implements
     public void onDateSelected(int year, int month) {
         mYear = year;
         mMonth = month;
+
+        mToolbarBackground.setBackgroundResource(YEARS_COLORS[mYear-2010]);
 
         if (mLoadedFirst) {
             showPosts(year, month);

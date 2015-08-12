@@ -53,9 +53,23 @@
 
     </RelativeLayout>
 
-    <include
+    <RelativeLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@+id/toolbar"
-        layout="@layout/toolbar" />
+        android:layout_width="match_parent" android:layout_height="wrap_content"
+        android:padding="10dp">
+
+        <com.grilla.hereseum.views.CustomFontTextView
+            android:id="@+id/toolbar_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:background="@android:color/transparent"
+            android:text="@string/main_toolbar_title"
+            android:textSize="@dimen/toolbar_title_text_size"
+            android:textColor="@color/text"/>
+
+    </RelativeLayout>
 
     <ListView
         android:id="@+id/posts_list"
