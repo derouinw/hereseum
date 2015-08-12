@@ -13,7 +13,7 @@
         android:layout_height="match_parent"
         android:text="Authenticating with Instagram..."
         android:layout_centerHorizontal="true"
-        android:layout_margin="15dp"
+        android:layout_margin="@dimen/auth_text_margin"
         android:visibility="gone"
         android:id="@+id/insta_loading_text"/>
 

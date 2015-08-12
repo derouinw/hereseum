@@ -6,45 +6,33 @@
     <LinearLayout
         android:id="@+id/color_footer"
         android:layout_width="match_parent"
-        android:layout_height="2dp"
+        android:layout_height="@dimen/hidden_timeline_height"
         android:layout_alignParentBottom="true"
         android:orientation="horizontal">
 
         <View
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:layout_height="match_parent"
-            android:background="#e74c3c" />
+            style="@style/TimelineHidden"
+            android:background="@color/timeline_color0" />
 
         <View
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:layout_height="match_parent"
-            android:background="#f1c40f" />
+            style="@style/TimelineHidden"
+            android:background="@color/timeline_color1" />
 
         <View
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:layout_height="match_parent"
-            android:background="#2ecc71" />
+            style="@style/TimelineHidden"
+            android:background="@color/timeline_color2" />
 
         <View
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:layout_height="match_parent"
-            android:background="#3498db" />
+            style="@style/TimelineHidden"
+            android:background="@color/timeline_color3" />
 
         <View
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:layout_height="match_parent"
-            android:background="#9b59b6" />
+            style="@style/TimelineHidden"
+            android:background="@color/timeline_color4" />
 
         <View
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:layout_height="match_parent"
-            android:background="#2c3e50" />
+            style="@style/TimelineHidden"
+            android:background="@color/timeline_color5" />
 
     </LinearLayout>
 
@@ -60,8 +48,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
-            android:textSize="36sp"
-            android:text="No posts found! :("/>
+            android:textSize="@dimen/no_posts_text_size"
+            android:text="@string/main_no_posts"/>
 
     </RelativeLayout>
 
@@ -96,7 +84,7 @@
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_above="@id/posts_loading"
-        android:layout_marginBottom="20dp"
-        android:text="Waiting on location..."/>
+        android:layout_marginBottom="@dimen/location_waiting_margin"
+        android:text="@string/main_waiting_on_location"/>
 
 </RelativeLayout>

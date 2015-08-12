@@ -3,6 +3,16 @@
     <color name="launch_background">#333</color>
     <color name="post_background">#222</color>
 
+    <!-- Launch activity -->
+    <color name="launch_login_text_color">#3498db</color>
+
+    <color name="timeline_color0">#e74c3c</color>
+    <color name="timeline_color1">#f1c40f</color>
+    <color name="timeline_color2">#2ecc71</color>
+    <color name="timeline_color3">#3498db</color>
+    <color name="timeline_color4">#9b59b6</color>
+    <color name="timeline_color5">#2c3e50</color>
+
     <color name="text">#fff</color>
     <color name="text_faded">#8fff</color>
     <color name="text_disabled">#2fff</color>

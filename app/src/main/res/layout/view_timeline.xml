@@ -78,37 +78,37 @@
         <com.grilla.hereseum.views.CustomFontTextView
             android:id="@+id/year10"
             style="@style/TimelineYear"
-            android:background="#e74c3c"
+            android:background="@color/timeline_color0"
             android:text="10"/>
 
         <com.grilla.hereseum.views.CustomFontTextView
             android:id="@+id/year11"
             style="@style/TimelineYear"
-            android:background="#f1c40f"
+            android:background="@color/timeline_color1"
             android:text="11"/>
 
         <com.grilla.hereseum.views.CustomFontTextView
             android:id="@+id/year12"
             style="@style/TimelineYear"
-            android:background="#2ecc71"
+            android:background="@color/timeline_color2"
             android:text="12"/>
 
         <com.grilla.hereseum.views.CustomFontTextView
             android:id="@+id/year13"
             style="@style/TimelineYear"
-            android:background="#3498db"
+            android:background="@color/timeline_color3"
             android:text="13"/>
 
         <com.grilla.hereseum.views.CustomFontTextView
             android:id="@+id/year14"
             style="@style/TimelineYear"
-            android:background="#9b59b6"
+            android:background="@color/timeline_color4"
             android:text="14"/>
 
         <com.grilla.hereseum.views.CustomFontTextView
             android:id="@+id/year15"
             style="@style/TimelineYear"
-            android:background="#2c3e50"
+            android:background="@color/timeline_color5"
             android:text="15"
             android:textColor="@color/text"/>
 

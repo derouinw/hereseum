@@ -8,9 +8,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
-        android:background="#0000"
-        android:text="HERESEUM"
-        android:textSize="48sp"
+        android:background="@android:color/transparent"
+        android:text="@string/main_toolbar_title"
+        android:textSize="@dimen/toolbar_title_text_size"
         android:textColor="@color/text"/>
 
 </RelativeLayout>

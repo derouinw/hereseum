@@ -5,4 +5,19 @@
     <string name="action_settings">Settings</string>
     <string name="title_activity_instagram_auth">InstagramAuthActivity</string>
     <string name="title_activity_main">MainActivity</string>
+
+    <!-- Launch activity -->
+    <string name="launch_title">Hereseum</string>
+    <string name="launch_login_text">Login to Instagram</string>
+
+    <!-- Auth activity -->
+    <string name="auth_error">Unable to authorize your account. Please try again.</string>
+
+    <!-- Main activity -->
+    <string name="main_loading_error">Error loading posts</string>
+    <string name="main_footer_current">You\'re all caught up</string>
+    <string name="main_footer_old">That\'s all for that month</string>
+    <string name="main_no_posts">No posts found! :(</string>
+    <string name="main_waiting_on_location">Waiting on location&#8230;</string>
+    <string name="main_toolbar_title">HERESEUM</string>
 </resources>

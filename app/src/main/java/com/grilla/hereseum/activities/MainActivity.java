@@ -158,7 +158,7 @@ public class MainActivity extends AppCompatActivity implements
             @Override
             public Void then(Task<List<InstaPost>> task) throws Exception {
                 if (task.isFaulted()) {
-                    Toast.makeText(MainActivity.this, "Error loading posts", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(MainActivity.this, getString(R.string.main_loading_error), Toast.LENGTH_SHORT).show();
                     return null;
                 }
 
@@ -185,7 +185,7 @@ public class MainActivity extends AppCompatActivity implements
             @Override
             public Void then(Task<List<InstaPost>> task) throws Exception {
                 if (task.isFaulted()) {
-                    Toast.makeText(MainActivity.this, "Error loading posts", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(MainActivity.this, getString(R.string.main_loading_error), Toast.LENGTH_SHORT).show();
                     return null;
                 }
 
@@ -216,12 +216,12 @@ public class MainActivity extends AppCompatActivity implements
                     Calendar cal = Calendar.getInstance();
                     if (mMonth == cal.get(Calendar.MONTH) && mYear == cal.get(Calendar.YEAR)) {
                         // current month
-                        mFooterText.setText("You're all caught up");
+                        mFooterText.setText(getString(R.string.main_footer_current));
                         mFooterText.setVisibility(View.VISIBLE);
                         mFooterProgress.setVisibility(View.GONE);
                     } else {
                         // other month
-                        mFooterText.setText("That's all for that month");
+                        mFooterText.setText(getString(R.string.main_footer_old));
                         mFooterText.setVisibility(View.VISIBLE);
                         mFooterProgress.setVisibility(View.GONE);
                     }

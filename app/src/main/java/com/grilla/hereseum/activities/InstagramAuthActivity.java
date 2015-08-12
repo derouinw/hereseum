@@ -29,6 +29,8 @@ public class InstagramAuthActivity extends AppCompatActivity {
             INSTA_CLIENT_ID + "&redirect_uri=" +
             INSTA_REDIRECT_URI + "&response_type=code" +
             "&scope=basic";
+    private static final String PARAM_CODE = "code";
+    private static final String PARAM_ERROR = "error";
 
     private WebView mWebView;
 
@@ -53,7 +55,7 @@ public class InstagramAuthActivity extends AppCompatActivity {
                 super.onPageFinished(view, url);
 
                 Uri uri = Uri.parse(url);
-                String authCode = uri.getQueryParameter("code");
+                String authCode = uri.getQueryParameter(PARAM_CODE);
                 if (!TextUtils.isEmpty(authCode)) {
                     TaskCreator.getInstance(InstagramAuthActivity.this).getAccessTokenTask(authCode)
                         .continueWith(new Continuation<String, Void>() {
@@ -71,7 +73,7 @@ public class InstagramAuthActivity extends AppCompatActivity {
                             }
                         });
                     authCodeReceived();
-                } else if (!TextUtils.isEmpty(uri.getQueryParameter("error"))) {
+                } else if (!TextUtils.isEmpty(uri.getQueryParameter(PARAM_ERROR))) {
                     authCodeError();
                 }
             }
@@ -100,7 +102,7 @@ public class InstagramAuthActivity extends AppCompatActivity {
 
     // Return to previous screen
     void authCodeError() {
-        Toast.makeText(getApplicationContext(), "You have to authorize with Insta to ride with Insta", Toast.LENGTH_SHORT).show();
+        Toast.makeText(getApplicationContext(), getString(R.string.auth_error), Toast.LENGTH_SHORT).show();
         finish();
     }
 }
