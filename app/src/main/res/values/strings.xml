@@ -12,6 +12,7 @@
 
     <!-- Auth activity -->
     <string name="auth_error">Unable to authorize your account. Please try again.</string>
+    <string name="auth_with_insta">Authenticating with Instagram&#8230;</string>
 
     <!-- Main activity -->
     <string name="main_loading_error">Error loading posts</string>
