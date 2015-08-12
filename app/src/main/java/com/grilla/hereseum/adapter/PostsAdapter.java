@@ -16,6 +16,10 @@ import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.Callable;
+
+import bolts.Continuation;
+import bolts.Task;
 
 /**
  * Created by bill on 8/7/15.
@@ -43,15 +47,25 @@ public class PostsAdapter extends BaseAdapter {
         notifyDataSetChanged();
     }
 
-    public void addPosts(List<InstaPost> posts) {
-        for (int i = 0, l = posts.size(); i < l; i++) {
-            InstaPost post = posts.get(i);
-            if (!contains(post) && post.getMonth() == mMonth) {
-                mPosts.add(posts.get(i));
+    public void addPosts(final List<InstaPost> posts) {
+        Task.callInBackground(new Callable<Void>() {
+            @Override
+            public Void call() throws Exception {
+                for (int i = 0, l = posts.size(); i < l; i++) {
+                    InstaPost post = posts.get(i);
+                    if (!contains(post) && post.getMonth() == mMonth) {
+                        mPosts.add(posts.get(i));
+                    }
+                }
+                return null;
             }
-        }
-
-        notifyDataSetChanged();
+        }).continueWith(new Continuation<Void, Void>() {
+            @Override
+            public Void then(Task<Void> task) throws Exception {
+                notifyDataSetChanged();
+                return null;
+            }
+        }, Task.UI_THREAD_EXECUTOR);
     }
 
     private boolean contains(InstaPost post) {
@@ -80,7 +94,7 @@ public class PostsAdapter extends BaseAdapter {
     }
 
     public long getLastTime() {
-        if (mPosts == null) {
+        if (mPosts == null || mPosts.isEmpty()) {
             return 0;
         }
 
