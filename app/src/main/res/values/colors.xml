@@ -14,6 +14,6 @@
     <color name="timeline_color5">#2c3e50</color>
 
     <color name="text">#fff</color>
-    <color name="text_faded">#8fff</color>
+    <color name="text_faded">#4fff</color>
     <color name="text_disabled">#2fff</color>
 </resources>
