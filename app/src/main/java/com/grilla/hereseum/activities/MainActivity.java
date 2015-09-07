@@ -76,12 +76,12 @@ public class MainActivity extends AppCompatActivity {
             public void onLocationChanged(Location location) {
                 // Called when a new location is found by the network location provider.
                 mCurrentLocation = location;
+                mTimelineManager.updateLocation(mCurrentLocation);
 
                 if (!mLoadedFirst) {
                     findViewById(R.id.location_waiting).setVisibility(View.GONE);
                     mLoadedFirst = true;
-                    Log.d(TAG, "Loading posts... ");
-                    loadPosts(mPreviousStartTime);
+                    mTimelineManager.loadPosts();
                 }
             }
 

@@ -2,7 +2,6 @@ package com.grilla.hereseum;
 
 import android.content.Context;
 import android.location.Location;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AbsListView;
@@ -107,7 +106,7 @@ public class TimelineManager implements TimelineView.OnDateSelectedListener, Abs
         mEmptyArea.setVisibility(View.GONE);
         mLoading.setVisibility(View.VISIBLE);
 
-        TaskCreator.getInstance(mContext).getPostsTask(mAccessToken, mCurrentLocation, mSelectedDate.getTimeInMillis())
+        TaskCreator.getInstance(mContext).getPostsTask(mAccessToken, mCurrentLocation, mSelectedDate.getTimeInMillis()/1000)
                 .continueWith(new Continuation<List<InstaPost>, Void>() {
                     @Override
                     public Void then(Task<List<InstaPost>> task) throws Exception {
@@ -180,7 +179,6 @@ public class TimelineManager implements TimelineView.OnDateSelectedListener, Abs
             // At last item, load more
             if (!mLoadingMore) {
                 long startTime = mAdapter.getLastTime();
-                Log.d(TAG, "Loading more: " + startTime);
 
                 // Reached the end
                 if (startTime == mPreviousStartTime) {
