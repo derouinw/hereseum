@@ -36,6 +36,7 @@ public class TimelineManager implements TimelineView.OnDateSelectedListener, Abs
     private RelativeLayout mEmptyArea;
     private ListView mList;
     private ProgressBar mLoading;
+    private TextView mLocationWaiting;
     private TextView mFooterText;
     private ProgressBar mFooterProgress;
 
@@ -86,6 +87,7 @@ public class TimelineManager implements TimelineView.OnDateSelectedListener, Abs
 
         mEmptyArea = (RelativeLayout)rootView.findViewById(R.id.empty_notif);
         mLoading = (ProgressBar)rootView.findViewById(R.id.posts_loading);
+        mLocationWaiting = (TextView)rootView.findViewById(R.id.location_waiting);
     }
 
     // Set date to today, at beginning of day
@@ -153,6 +155,12 @@ public class TimelineManager implements TimelineView.OnDateSelectedListener, Abs
 
     public void updateLocation(Location currentLocation) {
         mCurrentLocation = currentLocation;
+
+        if (!mLocationLoaded) {
+            mLocationWaiting.setVisibility(View.GONE);
+            loadPosts();
+        }
+
         mLocationLoaded = true;
     }
 

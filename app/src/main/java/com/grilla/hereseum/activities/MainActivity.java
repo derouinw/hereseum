@@ -5,6 +5,7 @@ import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
+import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -21,6 +22,7 @@ import com.etiennelawlor.quickreturn.library.listeners.QuickReturnListViewOnScro
 import com.grilla.hereseum.InstaPost;
 import com.grilla.hereseum.R;
 import com.grilla.hereseum.TimelineManager;
+import com.grilla.hereseum.adapter.PagerAdapter;
 import com.grilla.hereseum.adapter.PostsAdapter;
 import com.grilla.hereseum.helper.TaskCreator;
 import com.grilla.hereseum.views.TimelineView;
@@ -38,13 +40,11 @@ public class MainActivity extends AppCompatActivity {
 
     private String mAccessToken;
 
-    private boolean mLoadedFirst;
-
-    private TimelineManager mTimelineManager;
-
     private LocationManager mLocationManager;
     private LocationListener mLocationListener;
     private Location mCurrentLocation;
+
+    private PagerAdapter mPagerAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,7 +52,10 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         mAccessToken = getIntent().getStringExtra(EXTRA_ACCESS_TOKEN);
-        mTimelineManager = new TimelineManager(findViewById(R.id.root_view), mAccessToken);
+
+        ViewPager pager = (ViewPager)findViewById(R.id.pager);
+        mPagerAdapter = new PagerAdapter(getSupportFragmentManager(), mAccessToken);
+        pager.setAdapter(mPagerAdapter);
 
         setupLocation();
     }
@@ -76,13 +79,7 @@ public class MainActivity extends AppCompatActivity {
             public void onLocationChanged(Location location) {
                 // Called when a new location is found by the network location provider.
                 mCurrentLocation = location;
-                mTimelineManager.updateLocation(mCurrentLocation);
-
-                if (!mLoadedFirst) {
-                    findViewById(R.id.location_waiting).setVisibility(View.GONE);
-                    mLoadedFirst = true;
-                    mTimelineManager.loadPosts();
-                }
+                mPagerAdapter.updateLocation(location);
             }
 
             public void onStatusChanged(String provider, int status, Bundle extras) {}

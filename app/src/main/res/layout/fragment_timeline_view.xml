@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:id="@+id/color_footer"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/hidden_timeline_height"
+        android:layout_alignParentBottom="true"
+        android:orientation="horizontal">
+
+        <View
+            style="@style/TimelineHidden"
+            android:background="@color/timeline_color0" />
+
+        <View
+            style="@style/TimelineHidden"
+            android:background="@color/timeline_color1" />
+
+        <View
+            style="@style/TimelineHidden"
+            android:background="@color/timeline_color2" />
+
+        <View
+            style="@style/TimelineHidden"
+            android:background="@color/timeline_color3" />
+
+        <View
+            style="@style/TimelineHidden"
+            android:background="@color/timeline_color4" />
+
+        <View
+            style="@style/TimelineHidden"
+            android:background="@color/timeline_color5" />
+
+    </LinearLayout>
+
+    <RelativeLayout
+        android:id="@+id/empty_notif"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@id/color_footer"
+        android:visibility="gone">
+
+        <com.grilla.hereseum.views.CustomFontTextView
+            android:id="@+id/title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:textSize="@dimen/no_posts_text_size"
+            android:text="@string/main_no_posts"/>
+
+    </RelativeLayout>
+
+    <include
+        android:id="@+id/toolbar"
+        layout="@layout/toolbar" />
+
+    <ListView
+        android:id="@+id/posts_list"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@id/color_footer"
+        android:layout_below="@id/toolbar"
+        android:divider="@null"/>
+
+    <com.grilla.hereseum.views.TimelineView
+        android:id="@+id/timeline"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"/>
+
+    <ProgressBar
+        android:id="@+id/posts_loading"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        style="?android:attr/progressBarStyle" />
+
+    <com.grilla.hereseum.views.CustomFontTextView
+        android:id="@+id/location_waiting"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_above="@id/posts_loading"
+        android:layout_marginBottom="@dimen/location_waiting_margin"
+        android:text="@string/main_waiting_on_location"/>
+
+</RelativeLayout>
