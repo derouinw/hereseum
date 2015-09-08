@@ -25,4 +25,7 @@
     <dimen name="avatar_size">20dp</dimen>
     <dimen name="post_padding">10dp</dimen>
     <dimen name="post_margin">5dp</dimen>
+
+    <!-- Place -->
+    <dimen name="place_image_size">100dp</dimen>
 </resources>
