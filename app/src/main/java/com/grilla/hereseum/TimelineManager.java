@@ -176,6 +176,7 @@ public class TimelineManager implements TimelineView.OnDateSelectedListener, Abs
     public void viewOtherLocation(Place place) {
         mCurrentLocation = place.getLocation();
         mViewingOtherLocation = true;
+        mLocationWaiting.setVisibility(View.GONE);
 
         mTitleText.setText(place.getLocationName().toUpperCase());
 

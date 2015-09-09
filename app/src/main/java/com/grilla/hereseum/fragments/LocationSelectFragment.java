@@ -1,15 +1,20 @@
 package com.grilla.hereseum.fragments;
 
+import android.animation.Animator;
 import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.view.ViewCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewAnimationUtils;
 import android.view.ViewGroup;
 import android.view.WindowManager;
+import android.view.animation.AccelerateDecelerateInterpolator;
+import android.view.animation.LinearInterpolator;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 
@@ -58,6 +63,12 @@ public class LocationSelectFragment extends Fragment {
 
         mOverlay = rootView.findViewById(R.id.overlay);
         mOverlay.setVisibility(View.INVISIBLE);
+        mOverlay.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                closeSearch();
+            }
+        });
 
         mVoiceSearch = rootView.findViewById(R.id.voice_search);
         mVoiceSearch.setVisibility(View.INVISIBLE);
@@ -68,12 +79,7 @@ public class LocationSelectFragment extends Fragment {
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
                 if (!hasFocus) {
-                    mOverlay.setVisibility(View.INVISIBLE);
-                    mSearchBox.setVisibility(View.INVISIBLE);
-                    mVoiceSearch.setVisibility(View.INVISIBLE);
-
-                    InputMethodManager inputManager = (InputMethodManager) mContext.getSystemService(Context.INPUT_METHOD_SERVICE);
-                    inputManager.hideSoftInputFromWindow(mSearchBox.getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
+                    closeSearch();
                 }
             }
         });
@@ -82,12 +88,7 @@ public class LocationSelectFragment extends Fragment {
         searchButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mOverlay.setVisibility(View.VISIBLE);
-                mSearchBox.setVisibility(View.VISIBLE);
-                mVoiceSearch.setVisibility(View.VISIBLE);
-                if (mSearchBox.requestFocus()) {
-                    mContext.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_VISIBLE);
-                }
+                openSearch();
             }
         });
 
@@ -95,17 +96,60 @@ public class LocationSelectFragment extends Fragment {
         pinButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mOverlay.setVisibility(View.INVISIBLE);
-                mSearchBox.setVisibility(View.INVISIBLE);
-                mVoiceSearch.setVisibility(View.INVISIBLE);
-
-                InputMethodManager inputManager = (InputMethodManager) mContext.getSystemService(Context.INPUT_METHOD_SERVICE);
-                inputManager.hideSoftInputFromWindow(mSearchBox.getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
+                closeSearch();
 
                 mActivity.setPage(0, null);
             }
         });
 
         return rootView;
+    }
+
+    private void openSearch() {
+        Animator animator = ViewAnimationUtils.createCircularReveal(
+                mSearchBox,
+                mSearchBox.getWidth(),
+                mSearchBox.getHeight()/2,
+                0,
+                (float) Math.hypot(mSearchBox.getWidth(), mSearchBox.getHeight()));
+        animator.setDuration(200);
+        animator.setInterpolator(new LinearInterpolator());
+        animator.start();
+
+        mOverlay.setVisibility(View.VISIBLE);
+        mSearchBox.setVisibility(View.VISIBLE);
+        mVoiceSearch.setVisibility(View.VISIBLE);
+
+        mSearchBox.requestFocus();
+        InputMethodManager inputMethodManager=(InputMethodManager)mContext.getSystemService(Context.INPUT_METHOD_SERVICE);
+        inputMethodManager.toggleSoftInputFromWindow(mSearchBox.getApplicationWindowToken(), InputMethodManager.SHOW_FORCED, 0);
+
+    }
+
+    private void closeSearch() {
+        Animator animator = ViewAnimationUtils.createCircularReveal(
+                mSearchBox,
+                mSearchBox.getWidth(),
+                mSearchBox.getHeight()/2,
+                (float) Math.hypot(mSearchBox.getWidth(), mSearchBox.getHeight()),
+                0);
+        animator.setDuration(100);
+        animator.setInterpolator(new LinearInterpolator());
+        animator.start();
+
+        ViewCompat.postOnAnimationDelayed(mSearchBox, new Runnable() {
+            @Override
+            public void run() {
+                mSearchBox.setVisibility(View.INVISIBLE);
+            }
+        }, 100);
+
+        mOverlay.setVisibility(View.INVISIBLE);
+        mVoiceSearch.setVisibility(View.INVISIBLE);
+
+        InputMethodManager inputManager = (InputMethodManager) mContext.getSystemService(Context.INPUT_METHOD_SERVICE);
+        inputManager.hideSoftInputFromWindow(mSearchBox.getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
+
+        mSearchBox.setText("");
     }
 }
