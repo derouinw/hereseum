@@ -69,6 +69,10 @@ public class PagerAdapter extends FragmentPagerAdapter {
         mTimelineFragment.viewOtherLocation(place);
     }
 
+    public void viewCurrentLocation() {
+        mTimelineFragment.viewCurrentLocation();
+    }
+
     public interface LocationUpdateListener {
         void locationUpdated(Location location);
     }

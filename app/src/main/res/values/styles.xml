@@ -1,11 +1,11 @@
 <resources>
 
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+    <style name="AppTheme" parent="Theme.AppCompat.Light">
         <!-- Customize your theme here. -->
     </style>
 
-    <style name="ActivityNoActionBar" parent="Theme.AppCompat.NoActionBar">
+    <style name="ActivityNoActionBar" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="android:background">@color/launch_background</item>
     </style>
 

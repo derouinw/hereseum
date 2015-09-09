@@ -21,4 +21,31 @@
         android:layout_height="match_parent"
         android:layout_below="@id/featured_text" />
 
+    <View
+        android:id="@+id/overlay"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#8000" />
+
+    <EditText
+        android:id="@+id/search_edit"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_margin="10dp"
+        android:background="@drawable/search_bar_background"
+        android:elevation="2dp"
+        android:hint="Search"/>
+
+    <ImageView
+        android:id="@+id/voice_search"
+        android:layout_width="28dp"
+        android:layout_height="28dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginRight="10dp"
+        android:layout_alignRight="@id/search_edit"
+        android:layout_alignTop="@id/search_edit"
+        android:elevation="2dp"
+        android:src="@drawable/ic_mic_black_36dp"
+        android:alpha="0.7"/>
+
 </RelativeLayout>

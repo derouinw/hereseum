@@ -38,6 +38,7 @@ public class TimelineManager implements TimelineView.OnDateSelectedListener, Abs
     private ProgressBar mLoading;
     private TextView mLocationWaiting;
     private TextView mFooterText;
+    private TextView mTitleText;
     private ProgressBar mFooterProgress;
 
     private PostsAdapter mAdapter;
@@ -49,6 +50,7 @@ public class TimelineManager implements TimelineView.OnDateSelectedListener, Abs
 
     private String mAccessToken;
     private Location mCurrentLocation;
+    private Location mSavedLocation;
     private boolean mViewingOtherLocation;
 
     public TimelineManager(View rootView, String accessToken) {
@@ -86,6 +88,8 @@ public class TimelineManager implements TimelineView.OnDateSelectedListener, Abs
         mFooterProgress = (ProgressBar)footer.findViewById(R.id.footer_loading);
         mList.addFooterView(footer);
 
+        mTitleText = (TextView)rootView.findViewById(R.id.toolbar_title);
+
         mEmptyArea = (RelativeLayout)rootView.findViewById(R.id.empty_notif);
         mLoading = (ProgressBar)rootView.findViewById(R.id.posts_loading);
         mLocationWaiting = (TextView)rootView.findViewById(R.id.location_waiting);
@@ -97,7 +101,7 @@ public class TimelineManager implements TimelineView.OnDateSelectedListener, Abs
         mSelectedDate.set(GregorianCalendar.HOUR_OF_DAY, 0);
         mSelectedDate.set(GregorianCalendar.MINUTE, 0);
         mSelectedDate.set(GregorianCalendar.SECOND, 0);
-        mSelectedDate.set(GregorianCalendar.MILLISECOND,0);
+        mSelectedDate.set(GregorianCalendar.MILLISECOND, 0);
 
         mPreviousStartTime = mSelectedDate.getTimeInMillis();
     }
@@ -157,6 +161,8 @@ public class TimelineManager implements TimelineView.OnDateSelectedListener, Abs
     public void updateLocation(Location currentLocation) {
         if (!mViewingOtherLocation) {
             mCurrentLocation = currentLocation;
+        } else {
+            mSavedLocation = currentLocation;
         }
 
         if (!mLocationLoaded) {
@@ -171,14 +177,16 @@ public class TimelineManager implements TimelineView.OnDateSelectedListener, Abs
         mCurrentLocation = place.getLocation();
         mViewingOtherLocation = true;
 
-        // TODO: change title
+        mTitleText.setText(place.getLocationName().toUpperCase());
 
         loadPosts();
     }
 
-    public void viewCurrentLocation(Location location) {
-        mCurrentLocation = location;
+    public void viewCurrentLocation() {
+        mCurrentLocation = mSavedLocation;
         mViewingOtherLocation = false;
+
+        mTitleText.setText("HERESEUM");
 
         loadPosts();
     }

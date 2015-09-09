@@ -77,6 +77,8 @@ public class MainActivity extends AppCompatActivity implements LocationSelectFra
 
         if (page == 0 && place != null) {
             mPagerAdapter.viewOtherLocation(place);
+        } else if (page == 0) {
+            mPagerAdapter.viewCurrentLocation();
         }
     }
 }
