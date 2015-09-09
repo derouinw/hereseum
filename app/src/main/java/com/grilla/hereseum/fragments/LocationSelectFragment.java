@@ -17,10 +17,14 @@ import android.view.animation.AccelerateDecelerateInterpolator;
 import android.view.animation.LinearInterpolator;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
+import android.widget.ListView;
 
 import com.grilla.hereseum.Place;
 import com.grilla.hereseum.R;
 import com.grilla.hereseum.adapter.PlacesAdapter;
+import com.grilla.hereseum.adapter.SearchAdapter;
+
+import java.util.ArrayList;
 
 /**
  * Created by bill on 9/7/15.
@@ -30,10 +34,12 @@ public class LocationSelectFragment extends Fragment {
     private View mOverlay;
     private View mVoiceSearch;
     private EditText mSearchBox;
+    private ListView mSearchList;
 
     private Activity mContext;
     private MainActivityInteraction mActivity;
     private PlacesAdapter mPlacesAdapter;
+    private SearchAdapter mSearchAdapter;
 
     public interface MainActivityInteraction {
         void setPage(int page, Place place);
@@ -84,6 +90,15 @@ public class LocationSelectFragment extends Fragment {
             }
         });
 
+        mSearchList = (ListView)rootView.findViewById(R.id.search_list);
+        mSearchList.setVisibility(View.INVISIBLE);
+
+        ArrayList<Place> places = new ArrayList<>();
+        places.add(new Place("", "Tommy Trojan", "Los Angeles, CA", 34.020549, -118.285434));
+        places.add(new Place("", "Eiffel Tower", "Paris, France", 48.858309, 2.294399));
+        mSearchAdapter = new SearchAdapter(mContext, places);
+        mSearchList.setAdapter(mSearchAdapter);
+
         View searchButton = rootView.findViewById(R.id.search);
         searchButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -119,6 +134,7 @@ public class LocationSelectFragment extends Fragment {
         mOverlay.setVisibility(View.VISIBLE);
         mSearchBox.setVisibility(View.VISIBLE);
         mVoiceSearch.setVisibility(View.VISIBLE);
+        mSearchList.setVisibility(View.VISIBLE);
 
         mSearchBox.requestFocus();
         InputMethodManager inputMethodManager=(InputMethodManager)mContext.getSystemService(Context.INPUT_METHOD_SERVICE);
@@ -146,6 +162,7 @@ public class LocationSelectFragment extends Fragment {
 
         mOverlay.setVisibility(View.INVISIBLE);
         mVoiceSearch.setVisibility(View.INVISIBLE);
+        mSearchList.setVisibility(View.INVISIBLE);
 
         InputMethodManager inputManager = (InputMethodManager) mContext.getSystemService(Context.INPUT_METHOD_SERVICE);
         inputManager.hideSoftInputFromWindow(mSearchBox.getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
