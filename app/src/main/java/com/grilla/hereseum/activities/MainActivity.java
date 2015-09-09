@@ -7,33 +7,13 @@ import android.location.LocationManager;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.widget.AbsListView;
-import android.widget.ListView;
-import android.widget.ProgressBar;
-import android.widget.RelativeLayout;
-import android.widget.TextView;
-import android.widget.Toast;
 
-import com.etiennelawlor.quickreturn.library.enums.QuickReturnViewType;
-import com.etiennelawlor.quickreturn.library.listeners.QuickReturnListViewOnScrollListener;
-import com.grilla.hereseum.InstaPost;
+import com.grilla.hereseum.Place;
 import com.grilla.hereseum.R;
-import com.grilla.hereseum.TimelineManager;
 import com.grilla.hereseum.adapter.PagerAdapter;
-import com.grilla.hereseum.adapter.PostsAdapter;
-import com.grilla.hereseum.helper.TaskCreator;
-import com.grilla.hereseum.views.TimelineView;
+import com.grilla.hereseum.fragments.LocationSelectFragment;
 
-import java.util.Calendar;
-import java.util.List;
-
-import bolts.Continuation;
-import bolts.Task;
-
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements LocationSelectFragment.MainActivityInteraction {
     private static final String TAG = "MainActivity";
 
     public static final String EXTRA_ACCESS_TOKEN = "access_token";
@@ -44,6 +24,7 @@ public class MainActivity extends AppCompatActivity {
     private LocationListener mLocationListener;
     private Location mCurrentLocation;
 
+    private ViewPager mPager;
     private PagerAdapter mPagerAdapter;
 
     @Override
@@ -53,9 +34,9 @@ public class MainActivity extends AppCompatActivity {
 
         mAccessToken = getIntent().getStringExtra(EXTRA_ACCESS_TOKEN);
 
-        ViewPager pager = (ViewPager)findViewById(R.id.pager);
+        mPager = (ViewPager)findViewById(R.id.pager);
         mPagerAdapter = new PagerAdapter(getSupportFragmentManager(), mAccessToken);
-        pager.setAdapter(mPagerAdapter);
+        mPager.setAdapter(mPagerAdapter);
 
         setupLocation();
     }
@@ -88,5 +69,14 @@ public class MainActivity extends AppCompatActivity {
 
             public void onProviderDisabled(String provider) {}
         };
+    }
+
+    @Override
+    public void setPage(int page, Place place) {
+        mPager.setCurrentItem(page);
+
+        if (page == 0 && place != null) {
+            mPagerAdapter.viewOtherLocation(place);
+        }
     }
 }

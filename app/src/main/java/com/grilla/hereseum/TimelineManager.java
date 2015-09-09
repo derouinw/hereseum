@@ -49,6 +49,7 @@ public class TimelineManager implements TimelineView.OnDateSelectedListener, Abs
 
     private String mAccessToken;
     private Location mCurrentLocation;
+    private boolean mViewingOtherLocation;
 
     public TimelineManager(View rootView, String accessToken) {
         mContext = rootView.getContext();
@@ -154,7 +155,9 @@ public class TimelineManager implements TimelineView.OnDateSelectedListener, Abs
     }
 
     public void updateLocation(Location currentLocation) {
-        mCurrentLocation = currentLocation;
+        if (!mViewingOtherLocation) {
+            mCurrentLocation = currentLocation;
+        }
 
         if (!mLocationLoaded) {
             mLocationWaiting.setVisibility(View.GONE);
@@ -162,6 +165,22 @@ public class TimelineManager implements TimelineView.OnDateSelectedListener, Abs
         }
 
         mLocationLoaded = true;
+    }
+
+    public void viewOtherLocation(Place place) {
+        mCurrentLocation = place.getLocation();
+        mViewingOtherLocation = true;
+
+        // TODO: change title
+
+        loadPosts();
+    }
+
+    public void viewCurrentLocation(Location location) {
+        mCurrentLocation = location;
+        mViewingOtherLocation = false;
+
+        loadPosts();
     }
 
     @Override

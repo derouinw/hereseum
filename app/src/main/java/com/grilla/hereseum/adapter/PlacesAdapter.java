@@ -10,8 +10,10 @@ import android.widget.TextView;
 
 import com.grilla.hereseum.Place;
 import com.grilla.hereseum.R;
+import com.grilla.hereseum.fragments.LocationSelectFragment;
 import com.squareup.picasso.Picasso;
 
+import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 
 /**
@@ -21,19 +23,21 @@ public class PlacesAdapter extends RecyclerView.Adapter<PlacesAdapter.ViewHolder
 
     private Context mContext;
     private ArrayList<Place> mPlaces;
+    private LocationSelectFragment.MainActivityInteraction mActivity;
 
     private int mImageSize;
 
-    public PlacesAdapter(Context context) {
+    public PlacesAdapter(Context context, LocationSelectFragment.MainActivityInteraction activity) {
         super();
 
         mContext = context;
         mPlaces = new ArrayList<>();
+        mActivity = activity;
 
         Place tommyTrojan = new Place("https://upload.wikimedia.org/wikipedia/commons/0/06/Tommy_Trojan_statue_closeup.jpg",
-                "Tommy Trojan", "Los Angeles, CA");
+                "Tommy Trojan", "Los Angeles, CA", 34.020549, -118.285434);
         Place eiffelTower = new Place("http://www.premiumtours.co.uk/images/product/original/68_1.jpg",
-                "Eiffel Tower", "Paris, France");
+                "Eiffel Tower", "Paris, France", 48.858309, 2.294399);
 
         mPlaces.add(tommyTrojan);
         mPlaces.add(eiffelTower);
@@ -54,6 +58,12 @@ public class PlacesAdapter extends RecyclerView.Adapter<PlacesAdapter.ViewHolder
         holder.mSubtitle.setText("Found in " + place.getLocationName());
 
         Picasso.with(mContext).load(place.getImagePath()).resize(mImageSize, mImageSize).centerCrop().into(holder.mImage);
+
+        holder.mView.setOnClickListener(new PlaceClickListener(place, this));
+    }
+
+    void placeSelected(Place place) {
+        mActivity.setPage(0, place);
     }
 
     @Override
@@ -62,16 +72,39 @@ public class PlacesAdapter extends RecyclerView.Adapter<PlacesAdapter.ViewHolder
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
+        View mView;
+
         ImageView mImage;
         TextView mTitle;
         TextView mSubtitle;
 
         public ViewHolder(View itemView) {
             super(itemView);
+            mView = itemView;
 
             mImage = (ImageView)itemView.findViewById(R.id.place_image);
             mTitle = (TextView)itemView.findViewById(R.id.place_title);
             mSubtitle = (TextView)itemView.findViewById(R.id.place_subtitle);
+        }
+    }
+
+    private class PlaceClickListener implements View.OnClickListener {
+
+        private Place mPlace;
+        private WeakReference<PlacesAdapter> mAdapter;
+
+        public PlaceClickListener(Place p, PlacesAdapter adapter) {
+            mPlace = p;
+            mAdapter = new WeakReference<>(adapter);
+        }
+
+        @Override
+        public void onClick(View v) {
+            PlacesAdapter adapter = mAdapter.get();
+
+            if (adapter != null) {
+                adapter.placeSelected(mPlace);
+            }
         }
     }
 }

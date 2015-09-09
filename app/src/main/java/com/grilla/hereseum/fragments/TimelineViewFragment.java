@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.grilla.hereseum.Place;
 import com.grilla.hereseum.R;
 import com.grilla.hereseum.TimelineManager;
 import com.grilla.hereseum.adapter.PagerAdapter;
@@ -40,5 +41,9 @@ public class TimelineViewFragment extends Fragment implements PagerAdapter.Locat
     @Override
     public void locationUpdated(Location location) {
         mTimelineManager.updateLocation(location);
+    }
+
+    public void viewOtherLocation(Place place) {
+        mTimelineManager.viewOtherLocation(place);
     }
 }

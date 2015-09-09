@@ -6,6 +6,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
+import com.grilla.hereseum.Place;
 import com.grilla.hereseum.fragments.LocationSelectFragment;
 import com.grilla.hereseum.fragments.TimelineViewFragment;
 
@@ -20,6 +21,9 @@ public class PagerAdapter extends FragmentPagerAdapter {
     private Location mCurrentLocation;
     private LocationUpdateListener mLocationListener;
 
+    private TimelineViewFragment mTimelineFragment;
+    private LocationSelectFragment mLocationFragment;
+
     public PagerAdapter(FragmentManager fm, String accessToken) {
         super(fm);
 
@@ -30,14 +34,19 @@ public class PagerAdapter extends FragmentPagerAdapter {
     public Fragment getItem(int position) {
         switch(position) {
             case 0:
-                TimelineViewFragment timelineFrag = new TimelineViewFragment();
-                Bundle args = new Bundle();
-                args.putString(TimelineViewFragment.EXTRA_ACCESS_TOKEN, mAccessToken);
-                timelineFrag.setArguments(args);
-                mLocationListener = timelineFrag;
-                return timelineFrag;
+                if (mTimelineFragment == null) {
+                    mTimelineFragment = new TimelineViewFragment();
+                    Bundle args = new Bundle();
+                    args.putString(TimelineViewFragment.EXTRA_ACCESS_TOKEN, mAccessToken);
+                    mTimelineFragment.setArguments(args);
+                    mLocationListener = mTimelineFragment;
+                }
+                return mTimelineFragment;
             case 1:
-                return new LocationSelectFragment();
+                if (mLocationFragment == null) {
+                    mLocationFragment = new LocationSelectFragment();
+                }
+                return mLocationFragment;
         }
 
         return null;
@@ -54,6 +63,10 @@ public class PagerAdapter extends FragmentPagerAdapter {
         if (mLocationListener != null) {
             mLocationListener.locationUpdated(location);
         }
+    }
+
+    public void viewOtherLocation(Place place) {
+        mTimelineFragment.viewOtherLocation(place);
     }
 
     public interface LocationUpdateListener {
