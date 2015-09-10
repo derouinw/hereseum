@@ -33,13 +33,16 @@ public class SearchAdapter extends ArrayAdapter<Place> {
             convertView = LayoutInflater.from(mContext).inflate(R.layout.search_item, parent, false);
         }
 
-        // TODO: set values
+        Place place = mPlaces.get(position);
+
+        TextView.class.cast(convertView.findViewById(R.id.text)).setText(place.getName());
+        TextView.class.cast(convertView.findViewById(R.id.subtext)).setText(place.getLocationName());
 
         return convertView;
     }
 
     @Override
     public int getCount() {
-        return 10;
+        return mPlaces.size();
     }
 }

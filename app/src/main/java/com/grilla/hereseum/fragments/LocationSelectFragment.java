@@ -16,6 +16,7 @@ import android.view.WindowManager;
 import android.view.animation.AccelerateDecelerateInterpolator;
 import android.view.animation.LinearInterpolator;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.ListView;
 
@@ -93,11 +94,18 @@ public class LocationSelectFragment extends Fragment {
         mSearchList = (ListView)rootView.findViewById(R.id.search_list);
         mSearchList.setVisibility(View.INVISIBLE);
 
-        ArrayList<Place> places = new ArrayList<>();
+        final ArrayList<Place> places = new ArrayList<>();
         places.add(new Place("", "Tommy Trojan", "Los Angeles, CA", 34.020549, -118.285434));
         places.add(new Place("", "Eiffel Tower", "Paris, France", 48.858309, 2.294399));
         mSearchAdapter = new SearchAdapter(mContext, places);
         mSearchList.setAdapter(mSearchAdapter);
+        mSearchList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                closeSearch();
+                mActivity.setPage(0, places.get(position));
+            }
+        });
 
         View searchButton = rootView.findViewById(R.id.search);
         searchButton.setOnClickListener(new View.OnClickListener() {

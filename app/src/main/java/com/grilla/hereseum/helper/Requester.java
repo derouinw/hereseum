@@ -76,6 +76,7 @@ public class Requester {
         };
 
         StringRequest request = new StringRequest(Request.Method.GET, url, volleyListener, errorListener);
+        android.util.Log.d("Requester", "Making get request: " + url);
         mRequestQueue.add(request);
     }
 }
