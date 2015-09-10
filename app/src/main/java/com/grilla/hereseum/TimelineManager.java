@@ -103,10 +103,10 @@ public class TimelineManager implements TimelineView.OnDateSelectedListener, Abs
         mSelectedDate.set(GregorianCalendar.SECOND, 0);
         mSelectedDate.set(GregorianCalendar.MILLISECOND, 0);
 
-        mPreviousStartTime = mSelectedDate.getTimeInMillis();
+        mPreviousStartTime = mSelectedDate.getTimeInMillis()/1000;
     }
 
-    public void loadPosts() {
+    private void loadPosts() {
         mLoadingMore = true;
 
         mList.setVisibility(View.GONE);
@@ -137,7 +137,7 @@ public class TimelineManager implements TimelineView.OnDateSelectedListener, Abs
                 }, Task.UI_THREAD_EXECUTOR);
     }
 
-    public void addPosts(long startTime) {
+    private void addPosts(long startTime) {
         mLoadingMore = true;
 
         TaskCreator.getInstance(mContext).getPostsTask(mAccessToken, mCurrentLocation, startTime)
@@ -150,9 +150,14 @@ public class TimelineManager implements TimelineView.OnDateSelectedListener, Abs
                         }
 
                         List<InstaPost> posts = task.getResult();
-                        mAdapter.addPosts(posts);
+                        mAdapter.addPosts(posts).continueWith(new Continuation<Void, Void>() {
+                            @Override
+                            public Void then(Task<Void> task) throws Exception {
+                                mLoadingMore = false;
+                                return null;
+                            }
+                        });
 
-                        mLoadingMore = false;
                         return null;
                     }
                 }, Task.UI_THREAD_EXECUTOR);
@@ -197,9 +202,9 @@ public class TimelineManager implements TimelineView.OnDateSelectedListener, Abs
         mSelectedDate.set(Calendar.MONTH, month);
         mSelectedDate.set(Calendar.YEAR, year);
         mSelectedDate.set(Calendar.DAY_OF_MONTH, 0);
-        mPreviousStartTime = mSelectedDate.getTimeInMillis();
+        mPreviousStartTime = mSelectedDate.getTimeInMillis()/1000;
 
-        if (mLocationLoaded) {
+        if (mLocationLoaded || mViewingOtherLocation) {
             loadPosts();
         }
     }

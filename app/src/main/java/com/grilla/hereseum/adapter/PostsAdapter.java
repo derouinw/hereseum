@@ -47,13 +47,13 @@ public class PostsAdapter extends BaseAdapter {
         notifyDataSetChanged();
     }
 
-    public void addPosts(final List<InstaPost> posts) {
-        Task.callInBackground(new Callable<Void>() {
+    public Task<Void> addPosts(final List<InstaPost> posts) {
+        return Task.callInBackground(new Callable<Void>() {
             @Override
             public Void call() throws Exception {
                 for (int i = 0, l = posts.size(); i < l; i++) {
                     InstaPost post = posts.get(i);
-                    if (!contains(post) && post.getMonth() == mMonth) {
+                    if (!contains(post) && post.getMonth()-1 == mMonth) {
                         mPosts.add(posts.get(i));
                     }
                 }
