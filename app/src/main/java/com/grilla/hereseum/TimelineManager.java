@@ -196,6 +196,7 @@ public class TimelineManager implements TimelineView.OnDateSelectedListener, Abs
     public void onDateSelected(int year, int month) {
         mSelectedDate.set(Calendar.MONTH, month);
         mSelectedDate.set(Calendar.YEAR, year);
+        mSelectedDate.set(Calendar.DAY_OF_MONTH, 0);
         mPreviousStartTime = mSelectedDate.getTimeInMillis();
 
         if (mLocationLoaded) {

@@ -10,6 +10,7 @@ import android.widget.TextView;
 import com.grilla.hereseum.Place;
 import com.grilla.hereseum.R;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -18,13 +19,15 @@ import java.util.List;
 public class SearchAdapter extends ArrayAdapter<Place> {
 
     private Context mContext;
-    private List<Place> mPlaces;
+    private List<Place> mAllPlaces;
+    private List<Place> mFilteredPlaces;
 
     public SearchAdapter(Context context, List<Place> objects) {
         super(context, -1, objects);
 
         mContext = context;
-        mPlaces = objects;
+        mAllPlaces = objects;
+        mFilteredPlaces = new ArrayList<>(mAllPlaces);
     }
 
     @Override
@@ -33,7 +36,7 @@ public class SearchAdapter extends ArrayAdapter<Place> {
             convertView = LayoutInflater.from(mContext).inflate(R.layout.search_item, parent, false);
         }
 
-        Place place = mPlaces.get(position);
+        Place place = mFilteredPlaces.get(position);
 
         TextView.class.cast(convertView.findViewById(R.id.text)).setText(place.getName());
         TextView.class.cast(convertView.findViewById(R.id.subtext)).setText(place.getLocationName());
@@ -43,6 +46,22 @@ public class SearchAdapter extends ArrayAdapter<Place> {
 
     @Override
     public int getCount() {
-        return mPlaces.size();
+        return mFilteredPlaces.size();
+    }
+
+    public void onTextChanged(String text) {
+        mFilteredPlaces.clear();
+
+        for (Place p : mAllPlaces) {
+            if (p.getName().toLowerCase().contains(text)) {
+                mFilteredPlaces.add(p);
+            }
+        }
+
+        notifyDataSetChanged();
+    }
+
+    public Place getPlace(int position) {
+        return mFilteredPlaces.get(position);
     }
 }

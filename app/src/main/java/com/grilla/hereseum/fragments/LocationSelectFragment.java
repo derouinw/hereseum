@@ -8,6 +8,8 @@ import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewAnimationUtils;
@@ -102,8 +104,26 @@ public class LocationSelectFragment extends Fragment {
         mSearchList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Place place = mSearchAdapter.getPlace(position);
                 closeSearch();
-                mActivity.setPage(0, places.get(position));
+                mActivity.setPage(0, place);
+            }
+        });
+
+        mSearchBox.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                mSearchAdapter.onTextChanged(s.toString().trim().toLowerCase());
             }
         });
 
@@ -146,8 +166,7 @@ public class LocationSelectFragment extends Fragment {
 
         mSearchBox.requestFocus();
         InputMethodManager inputMethodManager=(InputMethodManager)mContext.getSystemService(Context.INPUT_METHOD_SERVICE);
-        inputMethodManager.toggleSoftInputFromWindow(mSearchBox.getApplicationWindowToken(), InputMethodManager.SHOW_FORCED, 0);
-
+        inputMethodManager.showSoftInput(mSearchBox, InputMethodManager.SHOW_FORCED);
     }
 
     private void closeSearch() {
@@ -172,9 +191,17 @@ public class LocationSelectFragment extends Fragment {
         mVoiceSearch.setVisibility(View.INVISIBLE);
         mSearchList.setVisibility(View.INVISIBLE);
 
-        InputMethodManager inputManager = (InputMethodManager) mContext.getSystemService(Context.INPUT_METHOD_SERVICE);
-        inputManager.hideSoftInputFromWindow(mSearchBox.getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
+        hideKeyboard();
 
         mSearchBox.setText("");
+    }
+
+    private void hideKeyboard() {
+        // Check if no view has focus:
+        View view = getActivity().getCurrentFocus();
+        if (view != null) {
+            InputMethodManager inputManager = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+            inputManager.hideSoftInputFromWindow(view.getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
+        }
     }
 }
