@@ -99,6 +99,14 @@ public class LocationSelectFragment extends Fragment {
         final ArrayList<Place> places = new ArrayList<>();
         places.add(new Place("", "Tommy Trojan", "Los Angeles, CA", 34.020549, -118.285434));
         places.add(new Place("", "Eiffel Tower", "Paris, France", 48.858309, 2.294399));
+        places.add(new Place("", "Rialto Bridge", "Venice, Italy", 45.438035, 12.335976));
+        places.add(new Place("", "Hagia Sophia", "Istanbul, Turkey", 41.008640, 28.979928));
+        places.add(new Place("", "Christ the Redeemer", "Rio de Janeiro, Brazil", -22.951837, -43.210788));
+        places.add(new Place("", "Golden Gate Bridge", "San Francisco, CA", 37.810758, -122.477204));
+        places.add(new Place("", "The Row", "Los Angeles, CA", 34.026283, -118.278353));
+        places.add(new Place("", "Metropolitan Museum of Art", "New York, NY", 40.779062, -73.962561));
+        places.add(new Place("", "Disneyland", "Anaheim, CA", 33.812040, -117.918982));
+        places.add(new Place("", "Times Square", "New York, NY", 40.758764, -73.985175));
         mSearchAdapter = new SearchAdapter(mContext, places);
         mSearchList.setAdapter(mSearchAdapter);
         mSearchList.setOnItemClickListener(new AdapterView.OnItemClickListener() {

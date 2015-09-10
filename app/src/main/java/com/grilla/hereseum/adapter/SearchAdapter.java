@@ -11,6 +11,7 @@ import com.grilla.hereseum.Place;
 import com.grilla.hereseum.R;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -27,6 +28,7 @@ public class SearchAdapter extends ArrayAdapter<Place> {
 
         mContext = context;
         mAllPlaces = objects;
+        Collections.sort(mAllPlaces);
         mFilteredPlaces = new ArrayList<>(mAllPlaces);
     }
 

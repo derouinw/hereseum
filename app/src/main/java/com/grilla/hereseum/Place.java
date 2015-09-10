@@ -1,11 +1,12 @@
 package com.grilla.hereseum;
 
 import android.location.Location;
+import android.support.annotation.NonNull;
 
 /**
  * Created by bill on 9/7/15.
  */
-public class Place {
+public class Place implements Comparable<Place> {
 
     private String mImagePath;
     private String mName;
@@ -37,5 +38,10 @@ public class Place {
 
     public Location getLocation() {
         return mLocation;
+    }
+
+    @Override
+    public int compareTo(@NonNull Place another) {
+        return mName.compareTo(another.mName);
     }
 }
