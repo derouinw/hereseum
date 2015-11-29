@@ -12,7 +12,7 @@
         android:scaleType="fitCenter"
         android:adjustViewBounds="true"
         android:layout_marginBottom="@dimen/post_margin"
-        android:src="@drawable/loading_bg"
+        android:src="@drawable/ic_loading_bg"
         android:background="@color/post_background"/>
 
     <ImageView

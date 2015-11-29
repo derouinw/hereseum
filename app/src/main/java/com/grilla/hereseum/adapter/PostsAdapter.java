@@ -119,7 +119,7 @@ public class PostsAdapter extends BaseAdapter {
         TextView.class.cast(convertView.findViewById(R.id.post_date)).setText(post.getCreated());
 
         ImageView image = (ImageView)convertView.findViewById(R.id.post_image);
-        Picasso.with(mContext).load(post.getImageUrl()).placeholder(R.drawable.loading_bg).into(image);
+        Picasso.with(mContext).load(post.getImageUrl()).placeholder(R.drawable.ic_loading_bg).into(image);
         image.setOnLongClickListener((PostListener)convertView.getTag());
 
         ImageView avatar = (ImageView)convertView.findViewById(R.id.post_avatar);
